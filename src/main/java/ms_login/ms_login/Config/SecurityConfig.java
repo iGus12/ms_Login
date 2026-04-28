@@ -10,13 +10,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // 1. Deshabilitamos la protección CSRF (necesario para APIs REST con React)
+  
             .csrf(csrf -> csrf.disable())
             
-            // 2. Le decimos a Spring qué rutas están permitidas sin estar logueado
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/login").permitAll() // Liberamos tu endpoint
-                .anyRequest().authenticated() // Bloqueamos todo lo demás
+                .requestMatchers("/api/auth/login").permitAll() 
+                .anyRequest().authenticated() 
             );
             
         return http.build();
