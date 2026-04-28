@@ -1,4 +1,4 @@
-package com.example.ms_login.model;
+package ms_login.ms_login.model;
 
 public class Usuario {
     private Long id;

@@ -1,4 +1,4 @@
-package cl.sanosysalvo.ms_login.controller;
+package ms_login.ms_login.controller;
 
 import ms_login.ms_login.dto.LoginRequest; 
 
