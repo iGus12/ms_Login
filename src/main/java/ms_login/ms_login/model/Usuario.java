@@ -1,6 +1,10 @@
 package ms_login.ms_login.model;
+import jakarta.persistence.*;
 
+@Entity 
 public class Usuario {
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;

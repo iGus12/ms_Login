@@ -5,8 +5,7 @@ public class LoginResponse {
     private String mensaje;
     private boolean success;
 
-    public LoginResponse() {
-    }
+    public LoginResponse() {}
 
     public LoginResponse(String mensaje, boolean success) {
         this.mensaje = mensaje;
