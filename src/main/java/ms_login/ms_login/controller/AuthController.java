@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
-    private ILoginService loginService; // <--- ESTO conecta con tu LoginServiceImpl
+    private ILoginService loginService; 
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        // Aquí llamamos a la lógica que genera el JWT real y revisa la BD
+       
         LoginResponse respuesta = loginService.login(request);
         
         if (respuesta.isSuccess()) {
             return ResponseEntity.ok(respuesta);
         } else {
-            return ResponseEntity.status(401).body(respuesta); // 401 si la clave está mala
+            return ResponseEntity.status(401).body(respuesta); 
         }
     }
 
