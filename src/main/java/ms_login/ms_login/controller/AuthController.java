@@ -1,33 +1,34 @@
 package ms_login.ms_login.controller;
 
-import ms_login.ms_login.dto.LoginRequest; 
-
+import ms_login.ms_login.dto.LoginRequest;
+import ms_login.ms_login.dto.LoginResponse;
+import ms_login.ms_login.model.Usuario;
+import ms_login.ms_login.service.ILoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-// Importaciones necesarias para devolver el JSON
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    @Autowired
+    private ILoginService loginService; // <--- ESTO conecta con tu LoginServiceImpl
+
     @PostMapping("/login")
-    public ResponseEntity<?> procesarLogin(@RequestBody LoginRequest peticionReact) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+        // Aquí llamamos a la lógica que genera el JWT real y revisa la BD
+        LoginResponse respuesta = loginService.login(request);
         
-        String correoRecibido = peticionReact.getEmail();
-        
-       
-        String jwtSimulado = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJndXN0YXZvIn0.FirmaSimuladaSanosYSalvos123";
-        
-        
-        Map<String, String> respuesta = new HashMap<>();
-        respuesta.put("email", correoRecibido);
-        respuesta.put("token", jwtSimulado);
-        respuesta.put("status", "200 OK");
-        
-        return ResponseEntity.ok(respuesta);
-        
+        if (respuesta.isSuccess()) {
+            return ResponseEntity.ok(respuesta);
+        } else {
+            return ResponseEntity.status(401).body(respuesta); // 401 si la clave está mala
+        }
+    }
+
+    @PostMapping("/registrar")
+    public ResponseEntity<Usuario> registrar(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok(loginService.registrar(usuario));
     }
 }
