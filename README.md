@@ -1,4 +1,4 @@
-# Ms_Auth (Login) - Sanos y Salvos
+# Ms_Login - Sanos y Salvos
 
 Microservicio encargado de la seguridad, autenticación y autorización de usuarios para el ecosistema **Sanos y Salvos**. Este componente valida las credenciales y emite los tokens de acceso necesarios para interactuar de forma segura con el resto de la plataforma.
 
