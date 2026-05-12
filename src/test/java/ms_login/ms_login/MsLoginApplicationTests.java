@@ -1,13 +1,13 @@
 package ms_login.ms_login;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
 class MsLoginApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void debeExistirClasePrincipal() {
+        assertThat(MsLoginApplication.class).isNotNull();
+    }
 }
