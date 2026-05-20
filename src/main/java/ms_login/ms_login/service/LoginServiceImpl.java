@@ -3,7 +3,7 @@ package ms_login.ms_login.service;
 import ms_login.ms_login.dto.LoginRequest;
 import ms_login.ms_login.dto.LoginResponse;
 import ms_login.ms_login.model.Usuario;
-import ms_login.ms_login.Repository.UsuarioRepository; 
+import ms_login.ms_login.repository.UsuarioRepository; 
 import ms_login.ms_login.util.JwtService; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
