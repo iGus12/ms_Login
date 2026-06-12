@@ -1,7 +1,6 @@
 package ms_login.ms_login.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 
 class LoginDtoTest {
@@ -9,7 +8,6 @@ class LoginDtoTest {
     @Test
     void debeCrearLoginRequest() {
         LoginRequest request = new LoginRequest();
-
         request.setUsername("usuario1");
         request.setPassword("1234");
         request.setEmail("usuario1@email.com");
@@ -22,19 +20,22 @@ class LoginDtoTest {
     @Test
     void debeCrearLoginResponseConConstructorVacio() {
         LoginResponse response = new LoginResponse();
-
         response.setMensaje("Login exitoso");
         response.setSuccess(true);
+        response.setRol("ADMIN");
 
         assertThat(response.getMensaje()).isEqualTo("Login exitoso");
         assertThat(response.isSuccess()).isTrue();
+        assertThat(response.getRol()).isEqualTo("ADMIN");
     }
 
     @Test
-    void debeCrearLoginResponseConConstructorCompleto() {
+    void debeCrearLoginResponseConConstructorParcial() {
         LoginResponse response = new LoginResponse("Credenciales incorrectas", false);
 
         assertThat(response.getMensaje()).isEqualTo("Credenciales incorrectas");
         assertThat(response.isSuccess()).isFalse();
+        assertThat(response.getToken()).isNull();
+        assertThat(response.getRol()).isNull();
     }
 }

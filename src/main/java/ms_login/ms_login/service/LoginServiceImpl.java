@@ -33,7 +33,7 @@ public class LoginServiceImpl implements ILoginService {
 
             String token = jwtService.generarToken(userOpt.get().getUsername());
 
-            return new LoginResponse(token, "Login exitoso", true);
+           return new LoginResponse(token, "Login exitoso", true, userOpt.get().getRol());
         }
 
         return new LoginResponse("Credenciales incorrectas", false);
