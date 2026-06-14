@@ -1,4 +1,4 @@
-package ms_login.ms_login.repository;
+package ms_login.ms_login.Repository;
 
 import ms_login.ms_login.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
