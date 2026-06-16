@@ -62,10 +62,10 @@ public class AuthControllerTest {
         
         when(loginService.login(any(LoginRequest.class))).thenReturn(response);
 
-        mockMvc.perform(post("/api/auth/login") // <--- RUTA CORRECTA
+        mockMvc.perform(post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized()) // <--- ESPERAMOS 401 PORQUE EL CÓDIGO DEVUELVE 401
+                .andExpect(status().isUnauthorized()) 
                 .andExpect(jsonPath("$.success").value(false))
                 .andExpect(jsonPath("$.message").value("Credenciales incorrectas"));
     }
