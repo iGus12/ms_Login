@@ -1,41 +1,41 @@
 package ms_login.ms_login.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LoginDtoTest {
 
     @Test
-    void debeCrearLoginRequest() {
+    @DisplayName("Debería validar LoginRequest con usuario real (Lucía Puentes)")
+    void testLoginRequest_Admin() {
         LoginRequest request = new LoginRequest();
-        request.setUsername("usuario1");
-        request.setPassword("1234");
-        request.setEmail("usuario1@email.com");
+        request.setUsername("luc.puentes");
+        request.setPassword("Aivj2011.");
+        request.setEmail("luc.puentes@duocuc.cl"); // Asumiendo formato
 
-        assertThat(request.getUsername()).isEqualTo("usuario1");
-        assertThat(request.getPassword()).isEqualTo("1234");
-        assertThat(request.getEmail()).isEqualTo("usuario1@email.com");
+        assertThat(request.getUsername()).isEqualTo("luc.puentes");
+        assertThat(request.getPassword()).isEqualTo("Aivj2011.");
+        assertThat(request.getEmail()).isEqualTo("luc.puentes@duocuc.cl");
     }
 
     @Test
-    void debeCrearLoginResponseConConstructorVacio() {
-        LoginResponse response = new LoginResponse();
-        response.setMensaje("Login exitoso");
-        response.setSuccess(true);
-        response.setRol("ADMIN");
+    @DisplayName("Debería validar LoginResponse con rol de Usuario Real (Carla Vasquez)")
+    void testLoginResponse_User() {
+        LoginResponse response = new LoginResponse("token-ca-vasquezl", "Login exitoso", true, "USER");
 
-        assertThat(response.getMensaje()).isEqualTo("Login exitoso");
+        assertThat(response.getMessage()).isEqualTo("Login exitoso");
         assertThat(response.isSuccess()).isTrue();
-        assertThat(response.getRol()).isEqualTo("ADMIN");
+        assertThat(response.getRol()).isEqualTo("USER");
+        assertThat(response.getToken()).isEqualTo("token-ca-vasquezl");
     }
 
     @Test
-    void debeCrearLoginResponseConConstructorParcial() {
-        LoginResponse response = new LoginResponse("Credenciales incorrectas", false);
+    @DisplayName("Debería validar LoginResponse con rol de Admin Real (Lucía Puentes)")
+    void testLoginResponse_Admin() {
+        LoginResponse response = new LoginResponse("token-luc-puentes", "Login exitoso", true, "ADMIN");
 
-        assertThat(response.getMensaje()).isEqualTo("Credenciales incorrectas");
-        assertThat(response.isSuccess()).isFalse();
-        assertThat(response.getToken()).isNull();
-        assertThat(response.getRol()).isNull();
+        assertThat(response.getRol()).isEqualTo("ADMIN");
+        assertThat(response.getMessage()).isEqualTo("Login exitoso");
     }
 }
