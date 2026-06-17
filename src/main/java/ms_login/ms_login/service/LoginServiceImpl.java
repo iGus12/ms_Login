@@ -36,19 +36,52 @@
             return repository.save(usuario);
         }
 
-        @Override
-        public LoginResponse login(LoginRequest request) {
+       @Override
+public LoginResponse login(LoginRequest request) {
+    try {
+        System.out.println("Intentando login con username: " + request.getUsername());
 
-            Optional<Usuario> userOpt = repository.findByUsername(request.getUsername());
+        Optional<Usuario> userOpt = repository.findByUsername(request.getUsername());
 
-            if (userOpt.isPresent() &&
-                    passwordEncoder.matches(request.getPassword(), userOpt.get().getPassword())) {
-
-                String token = jwtService.generarToken(userOpt.get().getUsername());
-
-                return new LoginResponse(token, "Login exitoso", true, userOpt.get().getRol());
-            }
-
+        if (userOpt.isEmpty()) {
+            System.out.println("Usuario no encontrado: " + request.getUsername());
             return new LoginResponse("Credenciales incorrectas", false);
         }
+
+        Usuario usuario = userOpt.get();
+
+        System.out.println("Usuario encontrado: " + usuario.getUsername());
+        System.out.println("Rol encontrado: " + usuario.getRol());
+
+        boolean passwordCorrecta = passwordEncoder.matches(
+                request.getPassword(),
+                usuario.getPassword()
+        );
+
+        System.out.println("Password correcta: " + passwordCorrecta);
+
+        if (!passwordCorrecta) {
+            return new LoginResponse("Credenciales incorrectas", false);
+        }
+
+        String token = jwtService.generarToken(usuario.getUsername());
+
+        System.out.println("Token generado correctamente");
+
+        return new LoginResponse(
+                token,
+                "Login exitoso",
+                true,
+                usuario.getRol()
+        );
+
+    } catch (Exception error) {
+        error.printStackTrace();
+
+        return new LoginResponse(
+                "Error interno en login: " + error.getMessage(),
+                false
+        );
+    }
+}
     }
