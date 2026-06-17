@@ -19,7 +19,8 @@ public class JwtServiceTest {
     @DisplayName("1. Happy Path: Generar y extraer token correctamente")
     void testGenerarYValidarToken() {
         String username = "luc.puentes";
-        String token = jwtService.generarToken(username);
+        // Ajuste: generarToken requiere (String, Long, String)
+        String token = jwtService.generarToken(username, 3600000L, "test-secret");
         
         assertNotNull(token);
         assertEquals(username, jwtService.extractSubject(token));
@@ -29,7 +30,7 @@ public class JwtServiceTest {
     @DisplayName("2. Seguridad: Fallar al leer un token manipulado")
     void testTokenManipulado() {
         // Creamos un token real
-        String token = jwtService.generarToken("luc.puentes");
+        String token = jwtService.generarToken("luc.puentes", 3600000L, "test-secret");
         // Lo rompemos (le cambiamos un caracter)
         String tokenRoto = token.substring(0, token.length() - 5) + "abcde";
 

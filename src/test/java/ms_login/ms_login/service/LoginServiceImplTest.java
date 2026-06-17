@@ -43,13 +43,15 @@ public class LoginServiceImplTest {
         request.setPassword("Aivj2011.");
 
         Usuario usuario = new Usuario();
+        usuario.setId(1L); // <-- ID agregado para el mock
         usuario.setUsername("luc.puentes");
         usuario.setPassword("hashed_Aivj2011.");
         usuario.setRol("ADMIN");
 
         when(repository.findByUsername("luc.puentes")).thenReturn(Optional.of(usuario));
         when(passwordEncoder.matches("Aivj2011.", "hashed_Aivj2011.")).thenReturn(true);
-        when(jwtService.generarToken("luc.puentes")).thenReturn("token-admin-seguro");
+        // <-- Mock ajustado con el ID y el Rol exactos
+        when(jwtService.generarToken("luc.puentes", 1L, "ADMIN")).thenReturn("token-admin-seguro");
 
         // Act
         LoginResponse response = loginService.login(request);
@@ -69,13 +71,15 @@ public class LoginServiceImplTest {
         request.setPassword("Carla1234");
 
         Usuario usuario = new Usuario();
+        usuario.setId(2L); // <-- ID agregado para el mock
         usuario.setUsername("ca.vasquezl");
         usuario.setPassword("hashed_Carla1234");
         usuario.setRol("USER");
 
         when(repository.findByUsername("ca.vasquezl")).thenReturn(Optional.of(usuario));
         when(passwordEncoder.matches("Carla1234", "hashed_Carla1234")).thenReturn(true);
-        when(jwtService.generarToken("ca.vasquezl")).thenReturn("token-user-seguro");
+        // <-- Mock ajustado con el ID y el Rol exactos
+        when(jwtService.generarToken("ca.vasquezl", 2L, "USER")).thenReturn("token-user-seguro");
 
         // Act
         LoginResponse response = loginService.login(request);

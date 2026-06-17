@@ -64,7 +64,13 @@ public LoginResponse login(LoginRequest request) {
             return new LoginResponse("Credenciales incorrectas", false);
         }
 
-        String token = jwtService.generarToken(usuario.getUsername());
+        Long usuarioId = Long.valueOf(usuario.getId().toString());
+
+        String token = jwtService.generarToken(
+            usuario.getUsername(),
+            usuarioId,
+            usuario.getRol()
+);
 
         System.out.println("Token generado correctamente");
 
