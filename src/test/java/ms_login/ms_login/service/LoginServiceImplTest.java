@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ms_login.ms_login.dto.LoginRequest;
 import ms_login.ms_login.dto.LoginResponse;
 import ms_login.ms_login.model.Usuario;
-import ms_login.ms_login.Repository.UsuarioRepository;
+import ms_login.ms_login.repository.UsuarioRepository;
 import ms_login.ms_login.util.JwtService;
 
 @ExtendWith(MockitoExtension.class)
